@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCU Anjem — Antar Jemput Mahasiswa SCU</title>
+    <meta name="description" content="SCU Anjem menyediakan layanan antar jemput mahasiswa SCU, survei kost, dan bantuan pengurusan berkas.">
+
+    <!-- Leaflet: library peta interaktif -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    >
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Urutan penting: Leaflet harus dimuat sebelum script.js -->
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+        defer
+    ></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="nav" id="home">
+    <a class="brand" href="#hero" aria-label="SCU Anjem - Home">
+        <span class="logo" aria-hidden="true">
+            <img src="images/motor-sports-bike-svgrepo-com.svg" alt="" class="motor-logo">
+        </span>
+        <span class="brand-text">
+            <span class="brand-name">SCU Anjem</span>
+            <span class="brand-subtitle">Antar Jemput Mahasiswa SCU</span>
+        </span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" type="button"
+        aria-label="Buka navigasi" aria-expanded="false" aria-controls="navLinks">☰</button>
+
+    <nav class="navlinks" id="navLinks" aria-label="Navigasi utama">
+        <span class="nav-indicator" id="navIndicator" aria-hidden="true"></span>
+        <a href="#home" class="active" aria-current="page">Home</a>
+        <a href="#why">Why Us</a>
+        <a href="#tutorial">Tutorial</a>
+        <a href="#services">Services</a>
+        <a href="#order-section">Order</a>
+        <a href="#contact">Contact Us</a>
+    </nav>
+
+    <div class="navright">
+        <a class="pill" id="orderNow" href="https://wa.me/62895392283355"
+            target="_blank" rel="noopener noreferrer">Order Sekarang</a>
+    </div>
+</header>
+
+<main class="wrap">
+
+    <!-- HOME -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="eyebrow">
+                <span class="dot"></span>
+                LAYANAN MAHASISWA, LEBIH PRAKTIS
+            </div>
+            <h1>Antar jemput mahasiswa,<br><span class="accent">tinggal SCU Anjem.</span></h1>
+            <p class="lead">
+                Solusi mobilitas dan bantuan kebutuhan mahasiswa.
+                Pilih layanan, cek estimasi ongkos, lalu lanjutkan
+                pemesanan melalui WhatsApp.
+            </p>
+            <div class="trust">
+                <span><b class="check">✓</b> Praktis &amp; fleksibel</span>
+                <span><b class="check">✓</b> Tarif transparan</span>
+                <span><b class="check">✓</b> Dekat dengan mahasiswa</span>
+            </div>
+            <div class="hero-actions">
+                <a class="primary button-link" href="#order-section">Cek Harga →</a>
+                <a class="pill" href="#tutorial">Cara Pemesanan</a>
+            </div>
+        </div>
+
+        <!-- ILUSTRASI PETA HERO (tetap seperti desain sebelumnya) -->
+        <div class="hero-art hero-map" aria-label="Ilustrasi peta menuju Universitas Katolik Soegijapranata">
+            <div class="map-background"></div>
+            <div class="map-road map-road-horizontal map-road-one"></div>
+            <div class="map-road map-road-horizontal map-road-two"></div>
+            <div class="map-road map-road-horizontal map-road-three"></div>
+            <div class="map-road map-road-vertical map-road-four"></div>
+            <div class="map-road map-road-vertical map-road-five"></div>
+            <div class="map-road map-road-vertical map-road-six"></div>
+            <div class="map-road map-road-diagonal map-road-seven"></div>
+            <div class="map-road map-road-diagonal map-road-eight"></div>
+            <div class="map-park park-one"></div>
+            <div class="map-park park-two"></div>
+            <div class="map-building building-one"></div>
+            <div class="map-building building-two"></div>
+            <div class="map-building building-three"></div>
+            <div class="map-building building-four"></div>
+            <div class="map-building building-five"></div>
+            <div class="map-building building-six"></div>
+            <div class="map-building building-seven"></div>
+            <div class="map-building building-eight"></div>
+            <div class="map-building building-nine"></div>
+            <div class="map-building building-ten"></div>
+
+            <div class="campus-area">
+                <div class="campus-topline">
+                    <span class="campus-symbol">SCU</span>
+                    <span class="campus-status"><span class="status-dot"></span>CAMPUS AREA</span>
+                </div>
+                <div class="campus-main-icon">
+                    <svg viewBox="0 0 100 80" role="img" aria-label="Ilustrasi gedung kampus">
+                        <path d="M8 30 L50 8 L92 30" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17 32 H83 V65 H17 Z" fill="currentColor" opacity="0.13"/>
+                        <path d="M17 32 H83 M22 32 V65 M39 32 V65 M61 32 V65 M78 32 V65 M12 68 H88" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M43 49 H57 V65 H43 Z" fill="currentColor" opacity="0.75"/>
+                        <path d="M8 73 H92" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="campus-name">
+                    <span>UNIVERSITAS KATOLIK</span>
+                    <strong>SOEGIJAPRANATA</strong>
+                    <small>SEMARANG, INDONESIA</small>
+                </div>
+            </div>
+
+            <div class="map-location-pin">
+                <div class="pin-shadow"></div>
+                <div class="pin-marker"><span>📍</span></div>
+                <div class="pin-label"><span class="pin-label-dot"></span>Lokasi Tujuan</div>
+            </div>
+            <div class="map-motor">
+                <div class="motor-circle"><span>🛵</span></div>
+                <div class="motor-caption"><span class="pin-label-dot"></span>Lokasi Kampus SCU</div>
+            </div>
+            <svg class="map-route" viewBox="0 0 600 420" preserveAspectRatio="none" aria-hidden="true">
+                <path class="map-route-shadow" d="M85 315 C120 315 135 260 190 260 S260 315 310 260 S380 185 430 205 S485 150 495 110"/>
+                <path class="map-route-line" d="M85 315 C120 315 135 260 190 260 S260 315 310 260 S380 185 430 205 S485 150 495 110"/>
+                <circle cx="85" cy="315" r="7" class="route-start"></circle>
+                <circle cx="495" cy="110" r="8" class="route-end"></circle>
+            </svg>
+            <a href="https://www.unika.ac.id/" class="map-info-card" target="_blank"
+                rel="noopener noreferrer" aria-label="Kunjungi website resmi Universitas Katolik Soegijapranata">
+                <div class="map-info-icon">📍</div>
+                <div class="map-info-text">
+                    <strong>Universitas Katolik Soegijapranata</strong>
+                    <span>Temukan perjalananmu bersama SCU Anjem</span>
+                </div>
+                <div class="map-info-arrow">↗</div>
+            </a>
+            <div class="map-service-badge">
+                <span class="map-service-icon">🛵</span>
+                <span class="map-service-text"><strong>SCU Anjem</strong><small>Siap menemani perjalananmu</small></span>
+                <span class="map-service-check">✓</span>
+            </div>
+            <div class="map-coordinate" aria-hidden="true">SEMARANG · CENTRAL JAVA</div>
+        </div>
+    </section>
+
+    <!-- WHY US -->
+    <section class="section" id="why">
+        <div class="section-head">
+            <div class="section-kicker">WHY CHOOSING US</div>
+            <h2>Why Choosing Us?</h2>
+            <p>Teman perjalanan yang memahami kebutuhan mahasiswa:</p>
+        </div>
+        <div class="feature-grid">
+            <article class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <h3>Dekat dengan Mahasiswa</h3>
+                <p>Layanan dirancang untuk membantu aktivitas harian mahasiswa SCU dan kebutuhan kampus.</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Aman, Satset, Fleksibel</h3>
+                <p>Mulai pemesanan dengan menghubungi admin dan lanjutkan detail bersama driver.</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-icon">💸</div>
+                <h3>Terjangkau &amp; Mudah Diakses</h3>
+                <p>Periksa estimasi ongkos terlebih dahulu sebelum melanjutkan pemesanan.</p>
+            </article>
+        </div>
+        <div class="stats">
+            <div class="stat"><strong>Praktis</strong><span>Alur pemesanan</span></div>
+            <div class="stat"><strong>3</strong><span>Layanan tersedia</span></div>
+            <div class="stat"><strong>Fleksibel</strong><span>Sesuai kebutuhan</span></div>
+            <div class="stat"><strong>Chat</strong><span>Terhubung dengan admin</span></div>
+        </div>
+    </section>
+
+    <!-- TUTORIAL -->
+    <section class="section tutorial-section" id="tutorial">
+        <div class="section-head">
+            <h2>How To Order?</h2>
+            <p>Ikuti lima langkah mudah untuk menggunakan layanan SCU Anjem.</p>
+        </div>
+        <div class="tutorial-grid">
+            <div class="tutorial-card">
+                <div class="tutorial-number">1</div>
+                <h3>Join WA Group</h3>
+                <p>Bergabung ke grup WhatsApp untuk mendapatkan informasi dan terhubung dengan driver.</p>
+                <a href="https://chat.whatsapp.com/JxgnQBapXZS7pNmxLWGAs6" target="_blank" rel="noopener">Info grup WhatsApp →</a>
+            </div>
+            <div class="tutorial-card">
+                <div class="tutorial-number">2</div>
+                <h3>Cek Estimasi Ongkos</h3>
+                <p>Periksa lokasi penjemputan, tujuan, dan estimasi biaya perjalanan.</p>
+                <a href="#order-section">Cek lokasi &amp; ongkos →</a>
+            </div>
+            <div class="tutorial-card">
+                <div class="tutorial-number">3</div>
+                <h3>Chat Order</h3>
+                <p>Kirim detail pemesanan melalui grup WhatsApp untuk mendapatkan driver.</p>
+                <a href="https://chat.whatsapp.com/JxgnQBapXZS7pNmxLWGAs6" target="_blank" rel="noopener">Chat di grup →</a>
+            </div>
+            <div class="tutorial-card">
+                <div class="tutorial-number">4</div>
+                <h3>Driver Take Order</h3>
+                <p>Driver yang tersedia mengambil pesanan dan mengonfirmasi detail perjalanan.</p>
+            </div>
+            <div class="tutorial-card">
+                <div class="tutorial-number">5</div>
+                <h3>OTW!</h3>
+                <p>Setelah detail disepakati, driver menuju lokasi penjemputan.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="services">
+        <div class="section-head">
+            <h2>Our Services</h2>
+            <p>Pilih layanan yang sesuai dengan kebutuhanmu.</p>
+        </div>
+        <div class="service-grid">
+            <article class="service-card" data-category="anjem">
+                <div class="service-art service-art-one"><span>🛵</span><b>ANTAR JEMPUT</b></div>
+                <div class="service-card-body">
+                    <h3>Antar Jemput</h3>
+                    <p>Antar atau jemput ke kampus, kos, dan tujuan lain sesuai kesepakatan.</p>
+                    <div class="service-meta"><span>Perjalanan harian</span><strong>Mulai Rp5.000</strong></div>
+                    <a href="#order-section" class="text-link">Cek ongkos →</a>
+                </div>
+            </article>
+            <article class="service-card" data-category="kost">
+                <div class="service-art service-art-two"><span>🏠</span><b>SURVEI KOST</b></div>
+                <div class="service-card-body">
+                    <h3>Survei Kost</h3>
+                    <p>Minta bantuan survei lokasi kos sebelum memutuskan tempat tinggal.</p>
+                    <div class="service-meta"><span>Bantuan survei</span><strong>Mulai Rp15.000</strong></div>
+                    <a href="#contact" class="text-link">Tanya layanan →</a>
+                </div>
+            </article>
+            <article class="service-card" data-category="berkas">
+                <div class="service-art service-art-three"><span>📄</span><b>URUS BERKAS</b></div>
+                <div class="service-card-body">
+                    <h3>Urus Berkas Kampus</h3>
+                    <p>Bantuan mengurus atau mengantarkan berkas sesuai kesepakatan.</p>
+                    <div class="service-meta"><span>Bantuan administrasi</span><strong>Mulai Rp15.000</strong></div>
+                    <a href="#contact" class="text-link">Tanya layanan →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ORDER -->
+    <section class="section" id="order-section">
+        <div class="section-head">
+            <h2 class="order-title">ORDER</h2>
+            <p>Masukkan lokasi penjemputan dan tujuan untuk melihat estimasi jarak, waktu, dan ongkos.</p>
+        </div>
+
+        <div class="price-steps">
+            <article class="price-step">
+                <h3>Langkah 1 — Pilih Lokasi</h3>
+                <p>Pilih kolom lokasi untuk membuka peta, cari tempat, gunakan GPS, atau tentukan titik langsung pada peta.</p>
+
+                <div class="field">
+                    <label for="pickup">LOKASI PENJEMPUTAN</label>
+                    <div class="inputwrap">
+                        <span class="fieldicon">●</span>
+                        <input id="pickup" type="text" autocomplete="off"
+                            placeholder="Pilih lokasi penjemputan pada peta" readonly
+                            aria-haspopup="dialog" aria-controls="mapModal">
+                        <div class="suggestions" id="pickupSuggest"></div>
+                    </div>
+                </div>
+
+                <div class="swaprow">
+                    <button class="swap" id="swap" type="button" title="Tukar lokasi"
+                        aria-label="Tukar lokasi penjemputan dan tujuan">↕</button>
+                </div>
+
+                <div class="field">
+                    <label for="destination">LOKASI TUJUAN</label>
+                    <div class="inputwrap">
+                        <span class="fieldicon destination-icon">●</span>
+                        <input id="destination" type="text" autocomplete="off"
+                            placeholder="Pilih lokasi tujuan pada peta" readonly
+                            aria-haspopup="dialog" aria-controls="mapModal">
+                        <div class="suggestions" id="destSuggest"></div>
+                    </div>
+                </div>
+
+                <button class="primary full-button" id="calculate" type="button">
+                    Hitung Jarak &amp; Ongkos →
+                </button>
+            </article>
+
+            <article class="price-step" id="step-fare">
+                <h3>Langkah 2 — Estimasi Ongkos</h3>
+                <p>Periksa ringkasan lokasi, jarak, waktu, dan estimasi ongkos perjalanan.</p>
+                <div class="summary">
+                    <div class="sumrow"><span>Penjemputan</span><strong id="sumPickup">Belum dipilih</strong></div>
+                    <div class="sumrow"><span>Tujuan</span><strong id="sumDest">Belum dipilih</strong></div>
+                    <div class="sumrow"><span>Jarak estimasi</span><strong id="sumDistance">—</strong></div>
+                    <div class="sumrow"><span>Waktu estimasi</span><strong id="sumTime">—</strong></div>
+                    <div class="sumrow total"><span>Estimasi ongkos</span><strong id="sumPrice">—</strong></div>
+                </div>
+                <button class="primary full-button" id="order" type="button" disabled>
+                    Lanjutkan Pemesanan →
+                </button>
+                <a id="openGoogleMaps" class="text-link" href="#" target="_blank"
+                    rel="noopener noreferrer" hidden>Buka Rute di Google Maps ↗</a>
+                <div class="notice" id="notice" role="status" aria-live="polite"></div>
+            </article>
+        </div>
+
+        <div class="price-note">
+            <span>ℹ️</span>
+            <div>
+                <strong>Perlu diperhatikan</strong>
+                <p>Jarak dan waktu dihitung berdasarkan rute jalan yang tersedia pada peta. Tarif estimasi dihitung Rp5.000 per kilometer dan perlu dikonfirmasi dengan driver.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT US + FOOTER -->
+    <section class="section contact-section" id="contact">
+        <div class="section-head">
+            <h2>Contact Us</h2>
+            <p>
+                Punya pertanyaan atau membutuhkan bantuan? Kami siap membantu.
+            </p>
+        </div>
+
+        <div class="contact-grid">
+            <!-- WHATSAPP -->
+            <article class="contact-card">
+                <div class="contact-icon">💬</div>
+                <h3>Help Center</h3>
+                <p>
+                    Butuh bantuan terkait pemesanan atau memiliki pertanyaan
+                    mengenai layanan kami? Hubungi tim SCU Anjem melalui WhatsApp.
+                </p>
+                <a
+                    href="https://wa.me/6282221693472"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="contact-link"
+                    data-contact="whatsapp"
+                >
+                    Contact Support <span>→</span>
+                </a>
+            </article>
+
+            <!-- LOCATION -->
+            <article class="contact-card">
+                <div class="contact-icon">📍</div>
+                <h3>Our Location</h3>
+                <p>
+                    SCU Anjem melayani perjalanan di sekitar Universitas Katolik
+                    Soegijapranata dan wilayah sekitarnya di Semarang.
+                </p>
+                <a
+                    href="https://www.google.com/maps/search/?api=1&amp;query=Universitas+Katolik+Soegijapranata+Semarang"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="contact-link"
+                >
+                    View Location <span>→</span>
+                </a>
+            </article>
+
+            <!-- INSTAGRAM -->
+            <article class="contact-card">
+                <div class="contact-icon">📸</div>
+                <h3>Connect with Us</h3>
+                <p>
+                    Ikuti media sosial SCU Anjem untuk mendapatkan informasi,
+                    pengumuman, dan kabar terbaru mengenai layanan kami.
+                </p>
+                <a
+                    href="#"
+                    class="contact-link"
+                    data-contact="instagram"
+                >
+                    Follow Us <span>→</span>
+                </a>
+            </article>
+        </div>
+
+        <!-- FOOTER DI DALAM CONTACT -->
+        <footer class="contact-footer">
+            <div class="contact-footer-brand">
+                <a href="#home" class="footer-brand">SCU Anjem.</a>
+                <p>Teman perjalanan terpercaya bagi mahasiswa SCU.</p>
+                <span>
+                    © <span id="currentYear">2026</span> SCU Anjem.
+                    All rights reserved.
+                </span>
+            </div>
+
+            <div class="contact-footer-links">
+                <a href="#home">Home</a>
+                <a href="#why">Why Us</a>
+                <a href="#tutorial">Tutorial</a>
+                <a href="#services">Services</a>
+                <a href="#order-section">Order</a>
+                <a href="#contact">Contact Us</a>
+            </div>
+        </footer>
+    </section>
+
+</main>
+
+<!-- MODAL PEMILIHAN LOKASI / PETA -->
+<div class="map-modal-backdrop" id="mapModal" aria-hidden="true">
+    <section class="map-modal" role="dialog" aria-modal="true" aria-labelledby="mapModalTitle">
+        <header class="map-modal-header">
+            <div>
+                <h2 id="mapModalTitle">Pilih Lokasi</h2>
+                <p id="mapModalHelp">Cari alamat atau pilih titik langsung pada peta.</p>
+            </div>
+            <button type="button" id="closeMapModal" aria-label="Tutup peta">×</button>
+        </header>
+
+        <div class="map-search-row">
+            <input id="mapSearchInput" type="search" placeholder="Cari nama tempat atau alamat..."
+                autocomplete="off" aria-label="Cari tempat atau alamat">
+            <button id="mapSearchButton" type="button">Cari</button>
+            <button id="useMyLocation" type="button">◎ Gunakan Lokasi Saya</button>
+        </div>
+
+        <div class="map-search-results" id="mapSearchResults" aria-live="polite"></div>
+        <div id="locationMap" aria-label="Peta untuk memilih lokasi"></div>
+
+        <div class="map-modal-footer">
+            <span id="selectedLocationText">Pilih titik pada peta atau cari alamat terlebih dahulu.</span>
+            <button id="confirmMapLocation" type="button" disabled>Konfirmasi Lokasi</button>
+        </div>
+    </section>
+</div>
+
+<!-- MODAL PEMESANAN -->
+<div class="modalback" id="modalback" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true"
+        aria-labelledby="modalTitle" aria-describedby="modalText">
+        <button class="modal-x" id="modalX" type="button" aria-label="Tutup modal">&times;</button>
+        <div class="modal-icon">🛵</div>
+        <h2 id="modalTitle">Lanjutkan Pemesanan</h2>
+        <p id="modalText">Periksa kembali detail perjalananmu.</p>
+        <div class="modal-summary" id="modalSummary"></div>
+        <div class="modalactions">
+            <button class="secondary" id="closeModal" type="button">Kembali</button>
+            <button class="primary" id="confirmDemo" type="button">Lanjutkan via WhatsApp</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
